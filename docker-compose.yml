@@ -1,0 +1,11 @@
+services:
+  dncommerce-pg:
+    image: bitnami/postgresql:16
+    container_name: dncommerce-db
+    restart: always
+    environment:
+      - POSTGRESQL_USERNAME=${DB_USER}
+      - POSTGRESQL_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_NAME}
+    ports:
+      - "5432:5432"
