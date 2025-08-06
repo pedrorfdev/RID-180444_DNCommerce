@@ -3,7 +3,8 @@ import { products } from "./products.js";
 
 export const stocks = pgTable("stocks", {
     id: uuid().primaryKey().defaultRandom(),
+    stockName: text().notNull(),
+    stockQuantity: integer().notNull().default(0),
     productId: uuid().unique().references(() => products.id, { onDelete: 'cascade' }),
-    quantity: integer().notNull().default(0),
     createdAt: timestamp().defaultNow()
 })
