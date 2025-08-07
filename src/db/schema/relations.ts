@@ -1,10 +1,10 @@
 import { relations } from "drizzle-orm";
-import { customers } from "./customer.js";
-import { orders } from "./orders.js";
-import { stocks } from "./stocks.js";
-import { products } from "./products.js";
-import { sales } from "./sales.js";
-import { orderProducts } from "./orderProducts.js";
+import { customers } from "./customer.ts";
+import { orders } from "./orders.ts";
+import { stocks } from "./stocks.ts";
+import { products } from "./products.ts";
+import { sales } from "./sales.ts";
+import { orderProducts } from "./orderProducts.ts";
 
 export const customerRelations = relations(customers, ({ many }) => ({
     orders: many(orders)

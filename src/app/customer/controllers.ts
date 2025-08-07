@@ -1,11 +1,10 @@
-import { create } from "domain"
-import { Request, Response } from 'express'
-import { customerService } from "./services.js"
+import type { Request, Response } from 'express'
+import { customerService } from "./services.ts"
 
 const customerController = {
     async create(request: Request, response: Response) {
         const { name, email, password } = request.body
-        const newCustomer = await customerService.create({name, email, password})
+        const newCustomer = await customerService.create({ name, email, password })
         return response.status(201).json(newCustomer)
     },
 
@@ -23,14 +22,14 @@ const customerController = {
 
         const customer = await customerService.getById(id)
 
-        if(!customer){
+        if (!customer) {
             throw new Error('There is no client with that id')
         }
 
         return customer
     },
 
-    async update(request: Request, response: Response){
+    async update(request: Request, response: Response) {
         const { id } = request.params
         const { name, email, password } = request.body
 
@@ -41,14 +40,14 @@ const customerController = {
             password
         })
 
-        if(!updatedCustomer){
+        if (!updatedCustomer) {
             throw new Error('The client cannot be updated')
         }
 
         return response.json(updatedCustomer)
     },
 
-    async delete(request: Request, response: Response){
+    async delete(request: Request, response: Response) {
         const { id } = request.params
 
         await customerService.delete(id)

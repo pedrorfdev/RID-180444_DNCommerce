@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { customerRouter } from "../app/customer/routes.js";
+import { customerRouter } from "../app/customer/routes.ts";
 
 const routes = Router()
 
@@ -8,3 +8,5 @@ routes.get('/health', (request, response) => {
 })
 
 routes.use('/customers', customerRouter)
+
+export default routes

@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm"
-import { db } from "../../db/connection.js"
-import { schema } from "../../db/schema/index.js"
+import { db } from "../../db/connection.ts"
+import { schema } from "../../db/schema/index.ts"
 
 type CustomerPayload = {
     name: string
@@ -13,18 +13,18 @@ interface UpdateCustomerPayload {
     name?: string;
     email?: string;
     password?: string;
-  }
+}
 
 export const customerService = {
-    async create({ name, email, password }: CustomerPayload){
-        const existingCustomer = await db
-            .select()
-            .from(schema.customers)
-            .where(eq(schema.customers.customerEmail, email))
+    async create({ name, email, password }: CustomerPayload) {
+        // const existingCustomer = await db
+        //     .select()
+        //     .from(schema.customers)
+        //     .where(eq(schema.customers.customerEmail, email))
 
-        if (existingCustomer.length > 0) {
-            throw new Error('There is already a customer with this email.');
-        }
+        // if (existingCustomer) {
+        //     throw new Error('There is already a customer with this email.');
+        // }
 
         const [newCustomer] = await db
             .insert(schema.customers)
@@ -52,7 +52,7 @@ export const customerService = {
             .select()
             .from(schema.customers)
             .where(eq(schema.customers.id, customerId))
-        
+
         return customer
     },
 
@@ -69,7 +69,7 @@ export const customerService = {
             .where(eq(schema.customers.id, id))
             .returning();
 
-        
+
         if (!updatedCustomer) {
             throw new Error('Customer not found.');
         }
@@ -94,6 +94,6 @@ export const customerService = {
         return {
             id: deletedCustomer.id,
             name: deletedCustomer.customerName,
-          };
+        };
     },
 }
