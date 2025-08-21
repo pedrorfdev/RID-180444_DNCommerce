@@ -17,15 +17,6 @@ interface UpdateCustomerPayload {
 
 export const customerService = {
     async create({ name, email, password }: CustomerPayload) {
-        // const existingCustomer = await db
-        //     .select()
-        //     .from(schema.customers)
-        //     .where(eq(schema.customers.customerEmail, email))
-
-        // if (existingCustomer) {
-        //     throw new Error('There is already a customer with this email.');
-        // }
-
         const [newCustomer] = await db
             .insert(schema.customers)
             .values({

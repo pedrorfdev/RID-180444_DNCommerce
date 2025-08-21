@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { customerRouter } from "../app/customer/routes.ts";
+import { productRouter } from "../app/product/routes.ts";
 
 const routes = Router()
 
@@ -8,5 +9,6 @@ routes.get('/health', (request, response) => {
 })
 
 routes.use('/customers', customerRouter)
+routes.use('/products', productRouter)
 
 export default routes
