@@ -8,6 +8,13 @@
       "when": 1754593186934,
       "tag": "0000_wise_alex_wilder",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1755798272451,
+      "tag": "0001_young_grandmaster",
+      "breakpoints": true
     }
   ]
 }
