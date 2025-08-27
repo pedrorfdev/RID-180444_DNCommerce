@@ -2,7 +2,7 @@ import { integer, pgTable, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { products } from "./products.ts";
 import { stocks } from "./stocks.ts";
 
-export const stockItems = pgTable("stock_items", {
+export const stockProducts = pgTable("stock_products", {
     id: uuid().primaryKey().defaultRandom(),
     productId: uuid().notNull().references(() => products.id, { onDelete: "cascade" }),
     stockId: uuid().notNull().references(() => stocks.id, { onDelete: "cascade" }),

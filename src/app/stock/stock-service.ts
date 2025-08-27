@@ -54,14 +54,14 @@ export const stockService = {
     },
 
     async update({ id, name, description }: UpdateStockPayload) {
-        const updateData: { name?: string; description?: string } = {};
-        
-        if (name !== undefined) updateData.name = name;
-        if (description !== undefined) updateData.description = description;
+        const updateData: { stockName?: string; stockDescription?: string } = {};
+    
+        if (name !== undefined) updateData.stockName = name; 
+        if (description !== undefined) updateData.stockDescription = description;
 
         const [updatedStock] = await db
             .update(schema.stocks)
-            .set({ stockName: name, stockDescription: description })
+            .set(updateData)
             .where(eq(schema.stocks.id, id))
             .returning();
 
@@ -74,7 +74,7 @@ export const stockService = {
 
     async createStockItem({ productId, stockId, quantity }: CreateStockItemPayload){
         const [newStockItem] = await db
-            .insert(schema.stockItems)
+            .insert(schema.stockProducts)
             .values({ productId, stockId, quantity })
             .returning()
 
@@ -83,11 +83,11 @@ export const stockService = {
     
     async addItemToStock({ stockId, productId, quantity }: AdjustStockPayload){
         const [updatedStockItem] = await db
-            .update(schema.stockItems)
+            .update(schema.stockProducts)
             .set({
-                quantity: sql`${schema.stockItems.quantity} + ${quantity}`
+                quantity: sql`${schema.stockProducts.quantity} + ${quantity}`
             })
-            .where(eq(schema.stockItems.productId, productId) && eq(schema.stockItems.stockId, stockId))
+            .where(eq(schema.stockProducts.productId, productId) && eq(schema.stockProducts.stockId, stockId))
             .returning()
         
         if(!updatedStockItem){
@@ -100,11 +100,11 @@ export const stockService = {
 
     async removeItemFromStock({ productId, stockId, quantity }: AdjustStockPayload){
         const [updatedStockItem] = await db
-            .update(schema.stockItems)
+            .update(schema.stockProducts)
             .set({
-                quantity: sql`${schema.stockItems.quantity} - ${quantity}`
+                quantity: sql`${schema.stockProducts.quantity} - ${quantity}`
             })
-            .where(eq(schema.stockItems.productId, productId) && eq(schema.stockItems.stockId, stockId))
+            .where(eq(schema.stockProducts.productId, productId) && eq(schema.stockProducts.stockId, stockId))
             .returning()
         
         if(!updatedStockItem){
@@ -116,9 +116,9 @@ export const stockService = {
 
     async getProductTotalQuantity(productId: string) {
         const result = await db
-            .select({ totalQuantity: sql<number>`sum(${schema.stockItems.quantity})` })
-            .from(schema.stockItems)
-            .where(eq(schema.stockItems.productId, productId));
+            .select({ totalQuantity: sql<number>`sum(${schema.stockProducts.quantity})` })
+            .from(schema.stockProducts)
+            .where(eq(schema.stockProducts.productId, productId));
 
         return result[0]?.totalQuantity || 0;
     },

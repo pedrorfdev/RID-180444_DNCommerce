@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { customerService } from "./services.ts"
+import { customerService } from "./customer-service.ts"
 
 const customerController = {
     async create(request: Request, response: Response) {

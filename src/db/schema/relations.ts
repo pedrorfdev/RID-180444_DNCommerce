@@ -5,7 +5,7 @@ import { stocks } from "./stocks.ts";
 import { products } from "./products.ts";
 import { sales } from "./sales.ts";
 import { orderProducts } from "./order-products.ts";
-import { stockItems } from "./stock-items.ts";
+import { stockProducts } from "./stock-products.ts";
 
 export const customerRelations = relations(customers, ({ many }) => ({
     orders: many(orders)
@@ -23,19 +23,13 @@ export const ordersRelations = relations(orders, ({ one, many }) => ({
     orderProducts: many(orderProducts)
 }))
 
-export const productsRelations = relations(products, ({ one, many }) => ({
-    stock: one(stocks, {
-        fields: [products.id],
-        references: [stocks.productId],
-    }),
+export const productsRelations = relations(products, ({ many }) => ({
+    stockProducts: many(stockProducts),
     orderProducts: many(orderProducts)
 }));
 
-export const stocksRelations = relations(stocks, ({ one }) => ({
-    product: one(products, {
-        fields: [stocks.productId],
-        references: [products.id],
-    }),
+export const stocksRelations = relations(stocks, ({ many }) => ({
+    stockProducts: many(stockProducts),
 }));
 
 export const salesRelations = relations(sales, ({ one }) => ({
@@ -56,13 +50,13 @@ export const orderProductsRelations = relations(orderProducts, ({ one }) => ({
     }),
 }))
 
-export const stockItemsRelations = relations(stockItems, ({ one }) => ({
+export const stockProductsRelations = relations(stockProducts, ({ one }) => ({
     product: one(products, {
-        fields: [stockItems.productId],
+        fields: [stockProducts.productId],
         references: [products.id],
     }),
     stock: one(stocks, {
-        fields: [stockItems.stockId],
+        fields: [stockProducts.stockId],
         references: [stocks.id],
     }),
 }));
