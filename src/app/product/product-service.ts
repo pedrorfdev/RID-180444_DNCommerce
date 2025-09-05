@@ -1,11 +1,14 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "../../db/connection.ts";
 import { schema } from "../../db/schema/index.ts";
+import { stockService } from "../stock/stock-service.ts";
 
-type ProductPayload = {
+type CreateProductPayload = {
     name: string;
     description: string;
     price: string;
+    stockId: string;
+    quantity: number;
 }
 
 interface UpdateProductPayload {
@@ -16,7 +19,7 @@ interface UpdateProductPayload {
 }
 
 export const productService = {
-    async create({ name, description, price }: ProductPayload) {
+    async create({ name, description, price, stockId, quantity }: CreateProductPayload) {
         const [newProduct] = await db
             .insert(schema.products)
             .values({
@@ -26,26 +29,56 @@ export const productService = {
             })
             .returning()
 
+        let newStockItem = null;
+        if (newProduct) {
+            newStockItem = await stockService.createStockItem({
+                productId: newProduct.id,
+                stockId: stockId,
+                quantity: quantity
+            });
+        }
+
         return {
             id: newProduct.id,
             name: newProduct.productName,
             description: newProduct.productDescription,
-            price: newProduct.productPrice
+            price: newProduct.productPrice,
+            quantity: newStockItem ? newStockItem.quantity : 0
         }
     },
     
     async getAll() {
-        const result = await db.select().from(schema.products)
+        const result = await db
+            .select({
+                id: schema.products.id,
+                name: schema.products.productName,
+                description: schema.products.productDescription,
+                price: schema.products.productPrice,
+                totalQuantity: sql<number>`sum(${schema.stockProducts.quantity})`
+            })
+            .from(schema.products)
+            .leftJoin(schema.stockProducts, eq(schema.products.id, schema.stockProducts.productId))
+            .groupBy(schema.products.id)
+
         return result
     },
     
     async getById(productId: string) {
         const product = await db
-            .select()
+            .select({
+                id: schema.products.id,
+                name: schema.products.productName,
+                description: schema.products.productDescription,
+                price: schema.products.productPrice,
+                totalQuantity: sql<number>`sum(${schema.stockProducts.quantity})`
+            })
             .from(schema.products)
+            .leftJoin(schema.stockProducts, eq(schema.products.id, schema.stockProducts.productId))
             .where(eq(schema.products.id, productId))
+            .groupBy(schema.products.id)
+            .limit(1)
 
-        return product
+        return product[0] || null
     },
     
     async update({ id, name, description, price }: UpdateProductPayload) {
