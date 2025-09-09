@@ -26,7 +26,7 @@ export const stockProductsController = {
     async remove(req: Request, res: Response) {
         try {
             const { productId, stockId, quantity } = req.body;
-            const updatedStockItem = await stockService.removeItemFromStock({ productId, stockId, quantity });
+            const updatedStockItem = await stockService.removeItemFromStock({ productId, quantity });
             res.status(200).json(updatedStockItem);
         } catch (error) {
             res.status(404).json({ error });
