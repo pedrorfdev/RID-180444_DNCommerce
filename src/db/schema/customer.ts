@@ -2,8 +2,8 @@ import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
 export const customers = pgTable("customers", {
     id: uuid().primaryKey().defaultRandom(),
-    customerName: text().notNull(),
-    customerEmail: text().notNull().unique(),
-    customerPassword: text().notNull(),
+    name: text().notNull(),
+    email: text().notNull().unique(),
+    password: text().notNull(),
     createdAt: timestamp().defaultNow().notNull()
 })

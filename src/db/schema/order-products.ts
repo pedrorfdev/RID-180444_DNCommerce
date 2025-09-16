@@ -7,7 +7,7 @@ export const orderProducts = pgTable("order_products", {
     orderId: uuid().notNull().references(() => orders.id, { onDelete: 'cascade' }),
     productId: uuid().notNull().references(() => products.id, { onDelete: 'restrict' }),
     quantity: integer().notNull().default(1),
-    unitPrice: decimal({ precision: 10, scale: 2 }).notNull()
+    price: decimal({ precision: 10, scale: 2 }).notNull()
 }, (table) => {
     return {
         unqOrderProduct: unique().on(table.orderId, table.productId)

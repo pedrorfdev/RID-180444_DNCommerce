@@ -3,7 +3,7 @@ import { products } from "./products.ts";
 
 export const stocks = pgTable("stocks", {
     id: uuid().primaryKey().defaultRandom(),
-    stockName: text().notNull(),
-    stockDescription: text(),
+    name: text().notNull(),
+    description: text(),
     createdAt: timestamp().defaultNow()
 })

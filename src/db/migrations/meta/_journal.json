@@ -22,6 +22,20 @@
       "when": 1756325580110,
       "tag": "0002_typical_angel",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1758062702162,
+      "tag": "0003_flippant_roxanne_simpson",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1758064710446,
+      "tag": "0004_curly_lake",
+      "breakpoints": true
     }
   ]
 }
