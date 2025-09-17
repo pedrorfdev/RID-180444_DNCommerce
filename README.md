@@ -227,7 +227,7 @@ DNCommerce/
 
 ## 🗄️ Esquema do Banco de Dados
 
-![Project Image Placeholder](https://via.placeholder.com/800x400/007ACC/FFFFFF?text=DNCommerce+Backend+API)
+![Modelo Lógico](https://github.com/pedrorfdev/RID-180444_DNCommerce/blob/main/dncommerce-database-model.png)
 
 ## 🐳 Deploy com Docker
 
@@ -312,4 +312,5 @@ Este projeto está licenciado sob a Licença ISC - veja o arquivo [LICENSE](LICE
 
 
 **Nota**: Este é um projeto de API backend. Você precisará de uma aplicação frontend para interagir com os endpoints da API.
+
 
