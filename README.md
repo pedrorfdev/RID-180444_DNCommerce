@@ -9,7 +9,7 @@ Uma API backend completa para e-commerce construída com Node.js, Express, TypeS
 - **Gestão de Clientes**: Operações CRUD completas para dados de clientes
 - **Catálogo de Produtos**: Gerenciar inventário de produtos com preços e descrições
 - **Gestão de Estoque**: Rastrear níveis de inventário e movimentações de estoque
-- **Processamento de Pedidos**: Lidar com criação, rastreamento e gerenciamento de pedidos
+- **Processamento de Pedidos**: Lidar com criação e gerenciamento de pedidos
 - **Analytics de Vendas**: Rastrear dados de vendas e gerar relatórios
 - **API RESTful**: Endpoints de API limpos e intuitivos
 - **Migrações de Banco**: Gerenciamento automatizado de esquema de banco com Drizzle ORM
@@ -227,38 +227,7 @@ DNCommerce/
 
 ## 🗄️ Esquema do Banco de Dados
 
-A aplicação utiliza as seguintes entidades principais:
-
-### **Customers (Clientes)**
-- `id`: UUID único do cliente
-- `name`: Nome do cliente
-- `email`: Email único do cliente
-- `password`: Senha do cliente (hash)
-- `createdAt`: Data de criação
-- `sale_id`: Referência para vendas
-
-### **Products (Produtos)**
-- `id`: UUID único do produto
-- `name`: Nome do produto
-- `description`: Descrição do produto
-- `price`: Preço (decimal com 2 casas)
-- `createdAt`: Data de criação
-
-### **Stocks (Estoque)**
-- Gerenciamento de níveis de inventário
-- Controle de entrada e saída de produtos
-
-### **Orders (Pedidos)**
-- Processamento e rastreamento de pedidos
-- Relacionamento com clientes e produtos
-
-### **Sales (Vendas)**
-- Registros de vendas e analytics
-- Relacionamento com clientes
-
-### **Tabelas de Relacionamento**
-- **Order Products**: Relacionamento pedido-produto
-- **Stock Products**: Relacionamento estoque-produto
+![Project Image Placeholder](https://via.placeholder.com/800x400/007ACC/FFFFFF?text=DNCommerce+Backend+API)
 
 ## 🐳 Deploy com Docker
 
@@ -343,3 +312,4 @@ Este projeto está licenciado sob a Licença ISC - veja o arquivo [LICENSE](LICE
 
 
 **Nota**: Este é um projeto de API backend. Você precisará de uma aplicação frontend para interagir com os endpoints da API.
+
