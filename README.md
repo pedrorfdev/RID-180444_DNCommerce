@@ -1,7 +1,5 @@
 # DNCommerce
 
-![Imagem do Projeto](https://via.placeholder.com/800x400/007ACC/FFFFFF?text=DNCommerce+Backend+API)
-
 Uma API backend completa para e-commerce construída com Node.js, Express, TypeScript e PostgreSQL. Este projeto oferece uma base robusta para gerenciar clientes, produtos, estoque, pedidos e operações de vendas.
 
 ## 🚀 Funcionalidades
@@ -312,5 +310,6 @@ Este projeto está licenciado sob a Licença ISC - veja o arquivo [LICENSE](LICE
 
 
 **Nota**: Este é um projeto de API backend. Você precisará de uma aplicação frontend para interagir com os endpoints da API.
+
 
 
