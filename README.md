@@ -291,11 +291,6 @@ curl -X POST http://localhost:3333/products \
 2. Configure a base URL: `http://localhost:3333`
 3. Teste os endpoints disponíveis
 
-
-## 📝 Licença
-
-Este projeto está licenciado sob a Licença ISC - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
 ## 👥 Autores
 
 - **Pedro Ferreira**
@@ -310,6 +305,7 @@ Este projeto está licenciado sob a Licença ISC - veja o arquivo [LICENSE](LICE
 
 
 **Nota**: Este é um projeto de API backend. Você precisará de uma aplicação frontend para interagir com os endpoints da API.
+
 
 
 
